@@ -4,10 +4,6 @@ type NavLinks = {
 }[];
 
 const navLinks: NavLinks = [
-  // {
-  //   name: 'Home',
-  //   href: '/',
-  // },
   {
     name: 'Dashboard',
     href: '/dashboard',
@@ -22,4 +18,4 @@ const navLinks: NavLinks = [
   },
 ];
 
-export default navLinks
+export default navLinks;
