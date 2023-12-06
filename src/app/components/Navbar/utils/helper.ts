@@ -4,10 +4,10 @@ type NavLinks = {
 }[];
 
 const navLinks: NavLinks = [
-  {
-    name: 'Home',
-    href: '/',
-  },
+  // {
+  //   name: 'Home',
+  //   href: '/',
+  // },
   {
     name: 'Dashboard',
     href: '/dashboard',

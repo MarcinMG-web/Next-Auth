@@ -11,6 +11,7 @@ export default function NavBar() {
     <div>
       <ul className='flex justify-between m-10 item-center'>
         <div>
+          <Link className='text-blue-700 mr-4' href='/'>
           <Image
             className='relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert'
             src='/next.svg'
@@ -19,7 +20,10 @@ export default function NavBar() {
             height={40}
             priority
           />
+            <li>Home</li>
+          </Link>
         </div>
+
         {navLinks.map(({ name, href }) => {
           const isActive = pathName.startsWith(href);
           return (
