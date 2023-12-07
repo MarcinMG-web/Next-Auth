@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import NavBar from './components/Navbar/Navbar';
+import NavBar from '../components/Navbar/Navbar';
+import StainEffect from '../components/StainEffect/StainEffect';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={inter.className}>
         <div className='mx-auto max-w-5xl text-1xl gap-2 mb-10'>
           <NavBar />
+          <StainEffect />
           {children}
         </div>
       </body>

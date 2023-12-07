@@ -1,4 +1,4 @@
-import StainEffect from "../components/StainEffect/StainEffect";
+import StainEffect from '../../components/StainEffect/StainEffect';
 
 export default function DashboardPage() {
   return (

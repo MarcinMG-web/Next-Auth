@@ -1,14 +1,21 @@
 'use client';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import Link from 'next/link';
-import StainEffect from '../components/StainEffect/StainEffect';
+import { useRouter } from 'next/navigation';
+import { registerUser } from '../api/register/serviseApi/service';
+import { RegisterCredential } from '@/type/type';
 
 export default function RegisterPage() {
-  const [registerCredential, setRegisterCredential] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const [registerCredential, setRegisterCredential] =
+    useState<RegisterCredential>({
+      name: '',
+      email: '',
+      password: '',
+    });
+
+  const [error, setError] = useState('');
+
+  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setRegisterCredential({
@@ -17,18 +24,25 @@ export default function RegisterPage() {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Temporary
-    console.log('registerCredential', registerCredential);
+    const registration = await registerUser(registerCredential);
+
+    switch (registration?.status) {
+      case 200:
+        setError('');
+        router.push('/login');
+        break;
+
+      default:
+        setError('Email is already in use');
+    }
   };
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-between p-24'>
       <div>
-        <StainEffect />
-
         <form onSubmit={handleSubmit}>
           <input
             type='text'
@@ -61,6 +75,8 @@ export default function RegisterPage() {
             Register me
           </button>
         </form>
+
+        <p className='text-red-500 mt-2'>{error}</p>
 
         <div className='text-center text-gray-500 mt-4'>- OR -</div>
 
