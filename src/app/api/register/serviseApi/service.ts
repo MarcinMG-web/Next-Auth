@@ -5,7 +5,7 @@ import { RegisterCredential } from '@/type/type';
  */
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-const configFetch = (method: HttpMethod, data?: unknown) => ({
+const configFetch = <T>(method: HttpMethod, data: T) => ({
   method,
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(data),
