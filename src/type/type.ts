@@ -3,3 +3,8 @@ export type RegisterCredential = {
   email: string;
   password: string;
 };
+
+export type AuthCredentials = {
+  email: string;
+  password: string;
+};
