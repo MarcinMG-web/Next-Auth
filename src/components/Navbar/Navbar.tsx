@@ -35,7 +35,7 @@ export default function NavBar() {
                 </span>
                 <li>
                   <button
-                    className='p-2 px-5 -mt-1 bg-blue-800 rounded-full'
+                    className='p-2 px-5 -mt-1 bg-blue-800 rounded'
                     onClick={() => signOut()}
                   >
                     Log out

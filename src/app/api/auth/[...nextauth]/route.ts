@@ -5,6 +5,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import connectDB from '@/db/configDB';
 import UserModel from '@/db/models/User';
+import { AuthCredentials } from '@/type/type';
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -16,9 +17,7 @@ export const authOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(
-        credentials: Record<'email' | 'password', string> | undefined
-      ) {
+      async authorize(credentials?: AuthCredentials ) {
         await connectDB();
         try {
           const user = await UserModel.findOne({ email: credentials?.email });
