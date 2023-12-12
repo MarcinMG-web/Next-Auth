@@ -22,6 +22,6 @@ export const registerUser = async (registerCredential: RegisterCredential) => {
       configFetch('POST', registerCredential)
     ).then((data) => data);
   } catch (error) {
-    console.log('error', error);
+    throw new Error(error as string);
   }
 };

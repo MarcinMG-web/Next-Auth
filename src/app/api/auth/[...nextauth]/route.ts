@@ -1,11 +1,10 @@
 import NextAuth from 'next-auth';
+
 import GithubProvider from 'next-auth/providers/github';
-import { Account, User as AuthUser } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
-import UserModel from '@/db/models/User';
 import connectDB from '@/db/configDB';
-import { AuthCredentials } from '@/type/type';
+import UserModel from '@/db/models/User';
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -13,24 +12,21 @@ export const authOptions = {
     CredentialsProvider({
       id: 'credentials',
       name: 'Credentials',
-
       credentials: {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-
-      async authorize(credentials?: Record<string, string>) {
+      async authorize(
+        credentials: Record<'email' | 'password', string> | undefined
+      ) {
         await connectDB();
-
         try {
           const user = await UserModel.findOne({ email: credentials?.email });
-
           if (user) {
             const isPasswordCorrect = await bcrypt.compare(
               credentials!.password,
               user.password
             );
-            
             if (isPasswordCorrect) {
               return user;
             }
@@ -40,7 +36,6 @@ export const authOptions = {
         }
       },
     }),
-
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
@@ -48,4 +43,6 @@ export const authOptions = {
     // ...add more providers here
   ],
 };
-export default NextAuth(authOptions);
+
+export const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

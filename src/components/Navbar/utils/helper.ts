@@ -5,10 +5,6 @@ type NavLinks = {
 
 const navLinks: NavLinks = [
   {
-    name: 'Dashboard',
-    href: '/dashboard',
-  },
-  {
     name: 'Login',
     href: '/login',
   },
