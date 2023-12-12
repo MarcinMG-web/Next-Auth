@@ -18,16 +18,17 @@ type RootLayoutProps = {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   const session = await getServerSession();
+
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <div className='mx-auto max-w-5xl text-1xl gap-2 mb-10'>
-          <SessionProvider session={session}>
+        <SessionProvider session={session}>
+          <div className='mx-auto max-w-5xl text-1xl gap-2 mb-10'>
             <NavBar />
             <StainEffect />
             {children}
-          </SessionProvider>
-        </div>
+          </div>
+        </SessionProvider>
       </body>
     </html>
   );
