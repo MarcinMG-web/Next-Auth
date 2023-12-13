@@ -1,7 +1,16 @@
+'use client';
 import Image from 'next/image';
 import StainEffect from '../components/StainEffect/StainEffect';
+import { useSession } from 'next-auth/react';
+import Loading from '@/components/Loading/Loading';
 
 export default function Home() {
+  const { status: sessionStatus } = useSession();
+
+  if (sessionStatus === 'loading') {
+    return <Loading />;
+  }
+
   return (
     <main className='flex flex-col items-center justify-between p-24'>
       <StainEffect />
